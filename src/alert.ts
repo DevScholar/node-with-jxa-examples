@@ -2,7 +2,7 @@
 // Show a modal NSAlert dialog and report which button the user clicked.
 // No NSApp.run() needed — runModal pumps its own modal session.
 
-import { $, importFramework, unwrap } from '@devscholar/node-with-jxa';
+import { $, importFramework } from '@devscholar/node-with-jxa';
 
 importFramework('AppKit');
 
@@ -17,7 +17,7 @@ alert.setInformativeText('This NSAlert was constructed and shown via @devscholar
 alert.addButtonWithTitle('OK');
 alert.addButtonWithTitle('Cancel');
 
-const response = unwrap<number>(alert.runModal);
+const response = alert.runModal;
 // NSAlertFirstButtonReturn = 1000, NSAlertSecondButtonReturn = 1001
 console.log('alert response code:', response);
 console.log(response === 1000 ? 'You clicked OK.' : 'You clicked Cancel.');
