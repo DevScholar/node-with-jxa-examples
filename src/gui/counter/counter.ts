@@ -8,33 +8,28 @@
 // when the button is clicked, the host pushes a sync event to Node, invokes
 // the JS implementation, and sends the return value back.
 
-import { $, ObjC, runApp, evalJxa } from '@devscholar/node-with-jxa';
+import { $, ObjC, runApp } from '@devscholar/node-with-jxa';
 
 ObjC.import('AppKit');
 
 const app = $.NSApplication.sharedApplication;
 app.setActivationPolicy($.NSApplicationActivationPolicyRegular);
 
-// Quit when the last window closes.  Declared in JXA so we can hold the
-// delegate at module scope (NSApplication.delegate is weak).
-const _delegate = evalJxa(`(function() {
-    if (!$.NwjxaQuitOnLastClose) {
-        ObjC.registerSubclass({
-            name: 'NwjxaQuitOnLastClose',
-            superclass: 'NSObject',
-            methods: {
-                'applicationShouldTerminateAfterLastWindowClosed:': {
-                    types: ['bool', ['id']],
-                    implementation: function() { return true; }
-                }
-            }
-        });
+// Quit when the last window closes.  Held at module scope —
+// NSApplication.delegate is a weak reference.
+ObjC.registerSubclass({
+    name: 'NwjxaQuitOnLastClose',
+    superclass: 'NSObject',
+    methods: {
+        'applicationShouldTerminateAfterLastWindowClosed:': {
+            types: ['bool', ['id']],
+            implementation: () => true
+        }
     }
-    var d = $.NwjxaQuitOnLastClose.alloc.init;
-    $.NSApplication.sharedApplication.delegate = d;
-    return d;
-})()`);
-void _delegate;
+});
+const _appDelegate = $.NwjxaQuitOnLastClose.alloc.init;
+app.delegate = _appDelegate;
+void _appDelegate;
 
 // --- window --------------------------------------------------------------
 

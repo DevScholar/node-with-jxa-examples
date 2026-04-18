@@ -9,7 +9,7 @@
 // same call stack and proxy calls (label.setStringValue, ...) work normally
 // inside the handler.
 
-import { $, ObjC, runApp, evalJxa } from '@devscholar/node-with-jxa';
+import { $, ObjC, runApp } from '@devscholar/node-with-jxa';
 
 ObjC.import('AppKit');
 
@@ -19,23 +19,18 @@ const app = $.NSApplication.sharedApplication;
 app.setActivationPolicy($.NSApplicationActivationPolicyRegular);
 
 // Quit when the last window closes (held at module scope: NSApplication.delegate is weak).
-const _appDelegate = evalJxa(`(function() {
-    if (!$.NwjxaQuitOnLastClose) {
-        ObjC.registerSubclass({
-            name: 'NwjxaQuitOnLastClose',
-            superclass: 'NSObject',
-            methods: {
-                'applicationShouldTerminateAfterLastWindowClosed:': {
-                    types: ['bool', ['id']],
-                    implementation: function() { return true; }
-                }
-            }
-        });
+ObjC.registerSubclass({
+    name: 'NwjxaQuitOnLastClose',
+    superclass: 'NSObject',
+    methods: {
+        'applicationShouldTerminateAfterLastWindowClosed:': {
+            types: ['bool', ['id']],
+            implementation: () => true
+        }
     }
-    var d = $.NwjxaQuitOnLastClose.alloc.init;
-    $.NSApplication.sharedApplication.delegate = d;
-    return d;
-})()`);
+});
+const _appDelegate = $.NwjxaQuitOnLastClose.alloc.init;
+app.delegate = _appDelegate;
 void _appDelegate;
 
 // --- window --------------------------------------------------------------
