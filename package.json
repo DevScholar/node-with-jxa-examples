@@ -7,7 +7,12 @@
     "start": "node start.js",
     "await-delay": "node start.js src/console/await-delay/await-delay.ts",
     "console-input": "node start.js src/console/console-input/console-input.ts",
-    "counter": "node start.js src/gui/counter/counter.ts"
+    "counter": "node start.js src/gui/counter/counter.ts",
+    "blocking-dialog": "node start.js src/gui/blocking-dialog/blocking-dialog.ts",
+    "prevent-close": "node start.js src/gui/prevent-close/prevent-close.ts",
+    "drag-box": "node start.js src/gui/drag-box/drag-box.ts",
+    "menu-counter": "node start.js src/gui/menu-counter/menu-counter.ts",
+    "webkit-counter": "node start.js src/gui/webkit-counter/webkit-counter.ts"
   },
   "dependencies": {
     "@devscholar/node-with-jxa": "file:../node-with-jxa"

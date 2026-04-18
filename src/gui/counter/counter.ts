@@ -59,7 +59,7 @@ label.setStringValue($.NSString.stringWithUTF8String('Clicks: 0'));
 label.setEditable(false);
 label.setBezeled(false);
 label.setDrawsBackground(false);
-label.setAlignment(2); // NSTextAlignmentCenter (macOS — iOS uses 1)
+label.setAlignment($.NSTextAlignmentCenter);
 label.setFont($.NSFont.systemFontOfSize(24));
 
 win.contentView.addSubview(label);
@@ -88,7 +88,7 @@ const handler = $.CounterHandler.alloc.init;
 
 const button = $.NSButton.alloc.initWithFrame($.NSMakeRect(140, 80, 120, 40));
 button.setTitle($.NSString.stringWithUTF8String('Click to Add'));
-button.setBezelStyle(1); // NSBezelStyleRounded
+button.setBezelStyle($.NSBezelStyleRounded);
 button.setTarget(handler);
 button.setAction('click:');
 
