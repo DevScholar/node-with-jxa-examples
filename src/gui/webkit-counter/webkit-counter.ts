@@ -16,9 +16,12 @@ ObjC.import('AppKit');
 ObjC.import('WebKit');
 
 // start.js compiles every example to a flat dist/ directory, so __dirname of
-// the bundled JS no longer matches the source.  Resolve counter.html from
-// the repo root (= cwd when invoked via `npm run webkit-counter`) instead.
-const htmlPath = path.join(process.cwd(), 'src', 'gui', 'webkit-counter', 'counter.html');
+// the bundled JS no longer matches the source.  start.js sets
+// NWJXA_EXAMPLE_SRC_DIR to the original source dir; fall back to cwd so the
+// example still works when invoked another way (e.g. ad-hoc tsx).
+const srcDir = process.env.NWJXA_EXAMPLE_SRC_DIR
+    || path.join(process.cwd(), 'src', 'gui', 'webkit-counter');
+const htmlPath = path.join(srcDir, 'counter.html');
 const htmlUri = 'file://' + htmlPath.replace(/\\/g, '/');
 
 const app = $.NSApplication.sharedApplication;

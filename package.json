@@ -1,8 +1,20 @@
 {
   "name": "node-with-jxa-examples",
   "version": "0.0.1",
+  "description": "Runnable examples for @devscholar/node-with-jxa — AppKit, Foundation, WebKit, and console demos driven from Node.js (macOS only)",
   "private": true,
   "type": "module",
+  "license": "MIT",
+  "author": "devscholar",
+  "os": ["darwin"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devscholar/node-with-jxa-examples.git"
+  },
+  "homepage": "https://github.com/devscholar/node-with-jxa-examples#readme",
+  "bugs": {
+    "url": "https://github.com/devscholar/node-with-jxa-examples/issues"
+  },
   "scripts": {
     "start": "node start.js"
   },

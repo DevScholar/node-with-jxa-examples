@@ -46,4 +46,8 @@ run('npx', ['tsc', '-p', tsconfigPath], { cwd: __dirname });
 const outFile = path.join(outDir, path.basename(absTarget).replace(/\.ts$/, '.js'));
 // Write a package.json so .js files in dist/ are treated as ES modules.
 fs.writeFileSync(path.join(outDir, 'package.json'), JSON.stringify({ type: 'module' }));
-run(process.execPath, [outFile]);
+// Expose the source directory so examples that load sibling assets (HTML,
+// images, etc.) can resolve them robustly, regardless of cwd at launch.
+run(process.execPath, [outFile], {
+    env: { ...process.env, NWJXA_EXAMPLE_SRC_DIR: path.dirname(absTarget) },
+});

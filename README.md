@@ -68,6 +68,54 @@ Reads a line from the terminal via `$.NSFileHandle.fileHandleWithStandardInput.a
 node start.js src/console/console-input/console-input.ts
 ```
 
+### `src/gui/counter/counter.ts`
+
+Classic counter: `NSWindow` with a label and a button. Each click bumps a JS-side number and updates the label via `setStringValue`. Smallest end-to-end demo of `ObjC.registerSubclass` + target/action wiring.
+
+```bash
+node start.js src/gui/counter/counter.ts
+```
+
+### `src/gui/drag-box/drag-box.ts`
+
+A draggable box driven by `NSPanGestureRecognizer`. Reads `gesture.translationInView` / `gesture.state` inside the JS handler and writes back the box's frame. Demonstrates the high-frequency sync-callback path and the nested run-loop's private mode (without it, AppKit would reset gesture state mid-callback — see [`project_node_with_jxa_nested_runloop.md`](../node-with-jxa/scripts/host.js)).
+
+```bash
+node start.js src/gui/drag-box/drag-box.ts
+```
+
+### `src/gui/blocking-dialog/blocking-dialog.ts`
+
+Opens an `NSAlert` from inside a button's click handler. Shows that a sync callback can itself drive a modal run-loop without dead-locking the IPC.
+
+```bash
+node start.js src/gui/blocking-dialog/blocking-dialog.ts
+```
+
+### `src/gui/menu-counter/menu-counter.ts`
+
+Counter wired to an `NSMenu` instead of a button. Demonstrates building an application menu bar (`NSApp.mainMenu`) and using a menu item's target/action just like a button.
+
+```bash
+node start.js src/gui/menu-counter/menu-counter.ts
+```
+
+### `src/gui/prevent-close/prevent-close.ts`
+
+Cocoa equivalent of `window.onbeforeunload`: an `NSWindowDelegate` that returns `false` from `windowShouldClose:` blocks the red close button. A separate "Quit" button flips a flag and calls `win.close` to allow the close. Verifies the sync-callback boolean return value reaches AppKit on the same call stack.
+
+```bash
+node start.js src/gui/prevent-close/prevent-close.ts
+```
+
+### `src/gui/webkit-counter/webkit-counter.ts`
+
+Loads `counter.html` into a `WKWebView` and bridges the page's `console.log` back to Node via a `WKScriptMessageHandler` named `console`. Demonstrates loading a sibling asset (`NWJXA_EXAMPLE_SRC_DIR` env var, set by `start.js`) and the `WebKit` framework import.
+
+```bash
+node start.js src/gui/webkit-counter/webkit-counter.ts
+```
+
 
 ## API patterns used here
 
