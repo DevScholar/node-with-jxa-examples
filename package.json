@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node start.js",
     "await-delay": "node start.js src/console/await-delay/await-delay.ts",
-    "console-input": "node start.js src/console/console-input/console-input.ts"
+    "console-input": "node start.js src/console/console-input/console-input.ts",
+    "counter": "node start.js src/gui/counter/counter.ts"
   },
   "dependencies": {
     "@devscholar/node-with-jxa": "file:../node-with-jxa"

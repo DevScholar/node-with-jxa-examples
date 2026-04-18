@@ -34,7 +34,7 @@ label.setStringValue($.NSString.stringWithUTF8String('Driven from Node.js via JX
 label.setEditable(false);
 label.setBezeled(false);
 label.setDrawsBackground(false);
-label.setAlignment(1); // NSTextAlignmentCenter
+label.setAlignment(2); // NSTextAlignmentCenter (macOS — iOS uses 1)
 label.setFont($.NSFont.systemFontOfSize(20));
 
 win.contentView.addSubview(label);
