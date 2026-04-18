@@ -19,5 +19,6 @@ alert.addButtonWithTitle('Cancel');
 
 const response = alert.runModal;
 // NSAlertFirstButtonReturn = 1000, NSAlertSecondButtonReturn = 1001
+// JXA returns NSModalResponse as a string, so use == for coercion.
 console.log('alert response code:', response);
-console.log(response === 1000 ? 'You clicked OK.' : 'You clicked Cancel.');
+console.log(response == 1000 ? 'You clicked OK.' : 'You clicked Cancel.');
