@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node start.js"
+    "start": "node start.js",
+    "await-delay": "node start.js src/console/await-delay/await-delay.ts",
+    "console-input": "node start.js src/console/console-input/console-input.ts"
   },
   "dependencies": {
     "@devscholar/node-with-jxa": "file:../node-with-jxa"

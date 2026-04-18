@@ -2,9 +2,9 @@
 // Create an NSWindow with a label, then run the application until the user
 // closes the window.
 
-import { $, importFramework, runApp, evalJxa } from '@devscholar/node-with-jxa';
+import { $, ObjC, runApp, evalJxa } from '@devscholar/node-with-jxa';
 
-importFramework('AppKit');
+ObjC.import('AppKit');
 
 const app = $.NSApplication.sharedApplication;
 app.setActivationPolicy($.NSApplicationActivationPolicyRegular);

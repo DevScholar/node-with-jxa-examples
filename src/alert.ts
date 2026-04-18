@@ -2,9 +2,9 @@
 // Show a modal NSAlert dialog and report which button the user clicked.
 // No NSApp.run() needed — runModal pumps its own modal session.
 
-import { $, importFramework } from '@devscholar/node-with-jxa';
+import { $, ObjC } from '@devscholar/node-with-jxa';
 
-importFramework('AppKit');
+ObjC.import('AppKit');
 
 // Without an activation policy, alerts may appear behind other windows.
 const app = $.NSApplication.sharedApplication;

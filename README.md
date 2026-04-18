@@ -52,14 +52,34 @@ Creates an `NSWindow` with a centered label and runs `NSApplication` until the w
 node start.js src/window.ts
 ```
 
+### `src/console/await-delay/await-delay.ts`
+
+Minimal async test: plain Node `setTimeout` + top-level `await`. No JXA objects touched — just confirms the watchdog cleans up the osascript host once the promise chain resolves.
+
+```bash
+node start.js src/console/await-delay/await-delay.ts
+```
+
+### `src/console/console-input/console-input.ts`
+
+Reads a line from the terminal via `$.NSFileHandle.fileHandleWithStandardInput.availableData`, exactly the way standalone JXA would. The host inherits Node's stdin, so the blocking read happens on the real TTY.
+
+```bash
+node start.js src/console/console-input/console-input.ts
+```
+
+
 ## API patterns used here
 
 | Need | API |
 | --- | --- |
-| Load a framework | `importFramework('AppKit')` |
+| Load a framework | `ObjC.import('AppKit')` |
 | Access a class | `$.NSWindow` |
 | Construct: `+alloc` then `-init` | `$.NSAlert.alloc.init` (zero-arg methods auto-invoke) |
-| Convert NSString/NSNumber → JS value | `unwrap<string>(nsStringRef)` |
+| Convert NSString/NSNumber → JS value | `ObjC.unwrap(nsStringRef)` |
+| Deep unwrap NSArray/NSDictionary | `ObjC.deepUnwrap(nsDictRef)` |
 | Call a C struct constructor or register a subclass | `evalJxa('(NSMakeRect(...))')` |
 | Run a Cocoa app | `runApp($.NSApplication.sharedApplication)` |
 | Print from the JXA host side | `hostLog('message')` |
+
+The `$` and `ObjC` names match standard JXA; everything else (`runApp`, `evalJxa`, `hostLog`) is node-with-jxa-specific plumbing.
