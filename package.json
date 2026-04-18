@@ -1,0 +1,16 @@
+{
+  "name": "node-with-jxa-examples",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "dependencies": {
+    "@devscholar/node-with-jxa": "file:../node-with-jxa"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.9.3"
+  }
+}
