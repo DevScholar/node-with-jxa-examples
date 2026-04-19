@@ -8,7 +8,7 @@
 // when the button is clicked, the host pushes a sync event to Node, invokes
 // the JS implementation, and sends the return value back.
 
-import { $, ObjC, runApp } from '@devscholar/node-with-jxa';
+import { $, ObjC } from '@devscholar/node-with-jxa';
 
 ObjC.import('AppKit');
 
@@ -97,4 +97,4 @@ console.log('Click the button to increase the counter...');
 win.makeKeyAndOrderFront(null);
 app.activateIgnoringOtherApps(true);
 
-runApp(app);
+app.run();

@@ -4,7 +4,7 @@
 // AppKit doesn't have GAction/Gio.Menu — instead each NSMenuItem points at a
 // target/action pair (an ObjC selector on a JS-implemented subclass).
 
-import { $, ObjC, runApp } from '@devscholar/node-with-jxa';
+import { $, ObjC } from '@devscholar/node-with-jxa';
 
 ObjC.import('AppKit');
 
@@ -159,4 +159,4 @@ console.log('Click the button or use Counter → Reset (⌘R)');
 win.makeKeyAndOrderFront(null);
 app.activateIgnoringOtherApps(true);
 
-runApp(app);
+app.run();

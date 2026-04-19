@@ -9,7 +9,7 @@
 // Layout: vertical split — toolbar (Back/Forward/URL entry) on top,
 // WKWebView filling the rest.  Address-bar Enter loads the typed URL.
 
-import { $, ObjC, runApp } from '@devscholar/node-with-jxa';
+import { $, ObjC } from '@devscholar/node-with-jxa';
 import * as path from 'node:path';
 
 ObjC.import('AppKit');
@@ -199,4 +199,4 @@ console.log('Click the button in the web view to increase the counter...');
 win.makeKeyAndOrderFront(null);
 app.activateIgnoringOtherApps(true);
 
-runApp(app);
+app.run();

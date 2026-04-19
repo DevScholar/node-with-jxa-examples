@@ -1,13 +1,14 @@
 // src/console/await-delay/await-delay.ts
-// Node's setTimeout works unchanged under node-with-jxa — no Cocoa needed,
-// so we don't even import a framework.  The JXA host stays idle; Node's
-// watchdog exits the process once the top-level await chain finishes.
-export {}; // make this a module so top-level `await` is allowed
+// Sleep via JXA's built-in `delay(seconds)` — runs on the host thread, not
+// Node's event loop.  The Node side blocks on the IPC round-trip until the
+// host wakes up, mirroring how Task.Delay / GLib timeouts are used in the
+// sibling node-ps1-dotnet and node-with-gjs examples.
+import { delay } from '@devscholar/node-with-jxa';
 
 console.log('0s');
-await new Promise(resolve => setTimeout(resolve, 1000));
+delay(1);
 console.log('1s');
-await new Promise(resolve => setTimeout(resolve, 1000));
+delay(1);
 console.log('2s');
-await new Promise(resolve => setTimeout(resolve, 1000));
+delay(1);
 console.log('3s');

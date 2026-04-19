@@ -2,7 +2,7 @@
 // Smallest possible example: load Foundation and exercise a few classes.
 // No GUI, no run loop — Node exits as soon as the script finishes.
 
-import { $, ObjC, hostLog } from '@devscholar/node-with-jxa';
+import { $, ObjC } from '@devscholar/node-with-jxa';
 
 ObjC.import('Foundation');
 
@@ -22,5 +22,5 @@ arr.addObject($.NSString.stringWithUTF8String('gamma'));
 console.log('count      :', arr.count);
 console.log('joined     :', ObjC.unwrap(arr.componentsJoinedByString(', ')));
 
-hostLog('foundation-hello finished');
+console.log('foundation-hello finished');
 

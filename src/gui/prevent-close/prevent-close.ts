@@ -9,7 +9,7 @@
 // same call stack and proxy calls (label.setStringValue, ...) work normally
 // inside the handler.
 
-import { $, ObjC, runApp } from '@devscholar/node-with-jxa';
+import { $, ObjC } from '@devscholar/node-with-jxa';
 
 ObjC.import('AppKit');
 
@@ -128,4 +128,4 @@ console.log("Click 'Quit' to actually close the window.");
 win.makeKeyAndOrderFront(null);
 app.activateIgnoringOtherApps(true);
 
-runApp(app);
+app.run();

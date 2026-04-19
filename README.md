@@ -54,7 +54,7 @@ Creates an `NSWindow` with a centered label and runs `NSApplication` until the w
 - `NSMakeRect` via the proxy bridge
 - Bitwise-OR'd `NSWindowStyleMask` values
 - `evalJxa` for `ObjC.registerSubclass` (installing an `NSApplicationDelegate` that quits when the last window closes)
-- `runApp(app)` — hands control to `-[NSApplication run]` on the host's main thread
+- `app.run()` — hands control to `-[NSApplication run]` on the host's main thread
 
 ```bash
 node start.js src/window.ts
@@ -138,7 +138,6 @@ node start.js src/gui/webkit-counter/webkit-counter.ts
 | File-path literal | `Path('/Users/me')` |
 | Sleep | `delay(0.5)` |
 | Register an ObjC subclass (delegates, target-action) | `ObjC.registerSubclass({...})` |
-| Run a Cocoa app | `runApp($.NSApplication.sharedApplication)` |
-| Print from the JXA host side | `hostLog('message')` |
+| Run a Cocoa app | `$.NSApplication.sharedApplication.run()` |
 
-`$`, `ObjC`, `Application`, `Path`, `delay`, `Ref` match standard JXA; everything else (`runApp`, `hostLog`) is node-with-jxa-specific plumbing.
+`$`, `ObjC`, `Application`, `Path`, `delay`, `Ref` match standard JXA; `releaseObject` and `init` are node-with-jxa-specific plumbing.

@@ -9,7 +9,7 @@
 // AppKit coordinate system note: in a non-flipped NSView, (0,0) is the
 // BOTTOM-left, and y increases upward.  We track positions in that space.
 
-import { $, ObjC, runApp } from '@devscholar/node-with-jxa';
+import { $, ObjC } from '@devscholar/node-with-jxa';
 
 ObjC.import('AppKit');
 
@@ -128,4 +128,4 @@ console.log('Window loaded. Try dragging the red square smoothly!');
 win.makeKeyAndOrderFront(null);
 app.activateIgnoringOtherApps(true);
 
-runApp(app);
+app.run();

@@ -3,7 +3,7 @@
 // Same style as a standalone `osascript -l JavaScript` script — every name
 // (`Application`, `Path`) is a regular import, no raw-source escape hatches.
 
-import { $, ObjC, Application, Path, hostLog } from '@devscholar/node-with-jxa';
+import { $, ObjC, Application, Path } from '@devscholar/node-with-jxa';
 
 ObjC.import('Foundation');
 
@@ -14,4 +14,4 @@ const finder = Application('Finder');
 finder.activate();
 finder.open(Path(home));
 
-hostLog('finder-open-home: asked Finder to open ' + home);
+console.log('finder-open-home: asked Finder to open ' + home);

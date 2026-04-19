@@ -2,7 +2,7 @@
 // Create an NSWindow with a label, then run the application until the user
 // closes the window.
 
-import { $, ObjC, runApp } from '@devscholar/node-with-jxa';
+import { $, ObjC } from '@devscholar/node-with-jxa';
 
 ObjC.import('AppKit');
 
@@ -61,4 +61,4 @@ void _delegate;
 win.makeKeyAndOrderFront(null);
 app.activateIgnoringOtherApps(true);
 
-runApp(app);
+app.run();
