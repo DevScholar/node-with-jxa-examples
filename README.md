@@ -31,6 +31,14 @@ Smallest possible example. Loads Foundation, reads process info, and builds an `
 node start.js src/foundation-hello.ts
 ```
 
+### `src/finder-open-home.ts`
+
+Pure JXA automation — no ObjC classes. Uses `Application('Finder')` and `Path(...)` (both JXA globals, reached via `evalJxa`) to tell Finder to activate and open the user's home folder in a new window. Closest analogue to a plain `osascript -l JavaScript` automation script.
+
+```bash
+node start.js src/finder-open-home.ts
+```
+
 ### `src/alert.ts`
 
 Shows a modal `NSAlert` dialog with OK / Cancel buttons and prints which one was clicked. Uses `runModal` directly — no `NSApp.run()` needed because `runModal` pumps its own modal session.
@@ -126,8 +134,11 @@ node start.js src/gui/webkit-counter/webkit-counter.ts
 | Construct: `+alloc` then `-init` | `$.NSAlert.alloc.init` (zero-arg methods auto-invoke) |
 | Convert NSString/NSNumber → JS value | `ObjC.unwrap(nsStringRef)` |
 | Deep unwrap NSArray/NSDictionary | `ObjC.deepUnwrap(nsDictRef)` |
-| Call a C struct constructor or register a subclass | `evalJxa('(NSMakeRect(...))')` |
+| Scripting bridge to an app | `Application('Finder')` |
+| File-path literal | `Path('/Users/me')` |
+| Sleep | `delay(0.5)` |
+| Register an ObjC subclass (delegates, target-action) | `ObjC.registerSubclass({...})` |
 | Run a Cocoa app | `runApp($.NSApplication.sharedApplication)` |
 | Print from the JXA host side | `hostLog('message')` |
 
-The `$` and `ObjC` names match standard JXA; everything else (`runApp`, `evalJxa`, `hostLog`) is node-with-jxa-specific plumbing.
+`$`, `ObjC`, `Application`, `Path`, `delay`, `Ref` match standard JXA; everything else (`runApp`, `hostLog`) is node-with-jxa-specific plumbing.
