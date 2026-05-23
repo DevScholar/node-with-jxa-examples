@@ -9,9 +9,18 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const target = process.argv[2];
+const args = process.argv.slice(2);
+let target = null;
+let runtime = 'node';
+for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--runtime' && args[i + 1]) {
+        runtime = args[++i].toLowerCase();
+    } else if (!args[i].startsWith('--')) {
+        target = args[i];
+    }
+}
 if (!target) {
-    console.error('Usage: node start.js src/<example>.ts');
+    console.error('Usage: node start.js src/<example>.ts [--runtime=node|bun|deno]');
     process.exit(2);
 }
 
@@ -48,6 +57,12 @@ const outFile = path.join(outDir, path.basename(absTarget).replace(/\.ts$/, '.js
 fs.writeFileSync(path.join(outDir, 'package.json'), JSON.stringify({ type: 'module' }));
 // Expose the source directory so examples that load sibling assets (HTML,
 // images, etc.) can resolve them robustly, regardless of cwd at launch.
-run(process.execPath, [outFile], {
+let execArgs;
+switch (runtime) {
+    case 'deno': execArgs = ['deno', ['run', '--allow-all', outFile]]; break;
+    case 'bun':  execArgs = ['bun',  ['run', outFile]]; break;
+    default:     execArgs = [process.execPath, ['--no-warnings', outFile]]; break;
+}
+run(execArgs[0], execArgs[1], {
     env: { ...process.env, NWJXA_EXAMPLE_SRC_DIR: path.dirname(absTarget) },
 });

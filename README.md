@@ -18,8 +18,14 @@ The `@devscholar/node-with-jxa` dependency is linked via `file:../node-with-jxa`
 ```bash
 node start.js src/<example>.ts
 ```
+### Running with Bun or Deno
 
-`start.js` compiles the TypeScript entry with `tsc` and runs the output with Node. No bundler.
+`--runtime` controls which runtime executes the compiled output:
+
+```bash
+bun start.js src/gui/counter/counter.ts --runtime=bun
+deno run --allow-all start.js src/gui/counter/counter.ts --runtime=deno
+```
 
 ## Examples
 
